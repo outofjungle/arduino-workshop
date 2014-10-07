@@ -9,7 +9,7 @@ void setup() {
 }
 
 void loop() {
-  float current_temp = get_temp( analogRead( SENSOR ) );
+  float current_temp = get_temp();
   
   if (current_temp != temp ) {
     temp = current_temp;
@@ -22,7 +22,8 @@ void loop() {
   delay( 500 );
 }
 
-float get_temp( int sensor_reading ) {
+float get_temp() {
+  int sensor_reading = analogRead( SENSOR );
   int average = calculate_average( sensor_reading );  
   float voltage = (average * 5.0)/1024.0;
   float temp = (voltage - 0.5) * 100 ;
