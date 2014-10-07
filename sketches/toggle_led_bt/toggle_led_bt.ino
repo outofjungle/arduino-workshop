@@ -1,12 +1,13 @@
 
 #define BUTTON 7
+#define LED 9
 
 String buffer = "";
 int command = 0;
 
+int led_state = LOW;
 int button_state;
 int last_button_state = LOW;
-int send_temp = 0;
 
 long debounce_time = 0;
 long debounce_delay = 50;
@@ -15,6 +16,8 @@ char msg[32];
 void setup() {
   Serial1.begin( 9600 );
   pinMode( BUTTON, INPUT );
+  pinMode( LED, OUTPUT );
+  digitalWrite( LED, led_state );
 }
 
 void loop() {
@@ -46,13 +49,5 @@ void loop() {
   
   digitalWrite( LED, led_state );
   last_button_state = current_button_state;
-}
-
-float get_temp() {
-  int sensor_reading = analogRead( SENSOR ) 
-  int average = calculate_average( sensor_reading );  
-  float voltage = (average * 5.0)/1024.0;
-  float temp = (voltage - 0.5) * 100 ;
-  return temp;
 }
 
